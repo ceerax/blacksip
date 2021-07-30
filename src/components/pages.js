@@ -15,11 +15,23 @@ import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 
 function Pages() {
     const [producto, setproducto] = useState([]);
-    const formato = new Intl.NumberFormat("en",{style:'currency',currency:'USD'})
+    const formato = new Intl.NumberFormat("en", { style: 'currency', currency: 'USD' });
+    /* const [arreglo, setarreglo] = useState() */
+    const [numeroPostal, setnumeroPostal] = useState();
+    const [colonia, setcolonia] = useState([]);
+    const [nombre, setnombre] = useState('');
+    const [apellido, setapellido] = useState('');
+    const [correo, setcorreo] = useState('');
+    const [telefono, settelefono] = useState('');
+    const [postal, setpostal] = useState('');
+    const [estado, setestado] = useState('');
+    const [ciudad, setciudad] = useState('');
+    const [delegacion, setdelegacion] = useState('');
+    const [calle, setcalle] = useState('');
 
     useEffect(() => {
         getProductos()
-    },[])
+    }, []);
 
     return (
         <body className="row p-3">
@@ -35,7 +47,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faUser} /></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre " aria-describedby="basic-addon1" />
+                                <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre " aria-describedby="basic-addon1" value={nombre} onChange={(e) => { setnombre(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -43,7 +55,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faUser} /></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Apellidos" aria-label="Apellidos" aria-describedby="basic-addon1" />
+                                <input type="text" class="form-control" placeholder="Apellidos" aria-label="Apellidos" aria-describedby="basic-addon1" value={apellido} onChange={(e) => { setapellido(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -51,7 +63,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faEnvelope} /></span>
                                 </div>
-                                <input type="email" class="form-control" placeholder="Correo Electrónico" aria-label="Correo Electrónico" aria-describedby="basic-addon1" />
+                                <input type="email" class="form-control" placeholder="Correo Electrónico" aria-label="Correo Electrónico" aria-describedby="basic-addon1" value={correo} onChange={(e) => { setcorreo(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -59,7 +71,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faPhone} /></span>
                                 </div>
-                                <input type="tel" class="form-control" placeholder="Número de teléfono" aria-label="Número de teléfono" aria-describedby="basic-addon1" />
+                                <input type="tel" class="form-control" placeholder="Número de teléfono" aria-label="Número de teléfono" aria-describedby="basic-addon1" value={telefono} onChange={(e) => { settelefono(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -67,7 +79,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>
                                 </div>
-                                <input type="number" class="form-control" placeholder="Código postal" aria-label="Código postal" aria-describedby="basic-addon1" />
+                                <input class="form-control" onChange={manejador} placeholder="Codigó postal" value={postal} onChange={(e) => { setpostal(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -75,7 +87,28 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>
                                 </div>
-                                <select name="" id=""><option value='colonia' disabled ></option></select>                                
+                                <select class="form-control" name="" id="">
+                                    {
+                                        numeroPostal == '11000' ? (
+                                            <>
+                                                {/* arreglo.map((item,index)=>{
+
+                                                }); */}
+                                                <option value="bog">Lomas de Chapultepec I Sección</option>
+                                                <option value="bog">Lomas de Chapultepec I Sección</option>
+                                                <option value="zipa">Lomas de Chapultepec VIII Sección</option>
+                                                <option value="zipa">Lomas de Chapultepec II Sección</option>
+                                            </>
+                                        ) : numeroPostal == '89000' ? (
+                                            <>
+                                                <option value="iztapalapa">Iztapalapa</option>
+                                                <option value="df">México DF</option>
+                                            </>
+                                        ) : (
+                                            <option value="">colonia</option>
+                                        )
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -83,7 +116,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faMapMarkerAlt} />  </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Estado/Región" aria-label="Estado/Región" aria-describedby="basic-addon1" />
+                                <input type="text" class="form-control" placeholder="Estado/Región" aria-label="Estado/Región" aria-describedby="basic-addon1" value={estado} onChange={(e) => { setestado(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -91,7 +124,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Ciudad" aria-label="Ciudad" aria-describedby="basic-addon1" />
+                                <input type="text" class="form-control" placeholder="Ciudad" aria-label="Ciudad" aria-describedby="basic-addon1" value={ciudad} onChange={(e) => { setciudad(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -99,7 +132,7 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faMapMarkerAlt} /></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Delegación o municipió" aria-label="Delegación o municipió" aria-describedby="basic-addon1" />
+                                <input type="text" class="form-control" placeholder="Delegación o municipio" aria-label="Delegación o municipió" aria-describedby="basic-addon1" value={delegacion} onChange={(e) => { setdelegacion(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-md-12 col-lg-6">
@@ -107,14 +140,14 @@ function Pages() {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faMapMarkedAlt} /></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Calle" aria-label="Calle" aria-describedby="basic-addon1" />
+                                <input type="text" class="form-control" placeholder="Calle" aria-label="Calle" aria-describedby="basic-addon1" value={calle} onChange={(e) => { setcalle(e.target.value) }} required="required" />
                             </div>
                         </div>
                         <div className="col-12 col-md-4 pr-0">
                             <button className=" color-btn text-white p-1">Libreta de Direcciones</button>
                         </div>
                         <div className="col-12 col-md-2 pr-0 ">
-                            <button className="color-btn text-white p-1">guardar</button>
+                            <button onClick={() => { forms() }} className="color-btn text-white p-1">guardar</button>
                         </div>
                         <div className="col-12 mt-3 row">
                             <div className="col-1 pr-0">
@@ -145,8 +178,8 @@ function Pages() {
                                             <div className="col-12 col-md-6 d-flex justify-content-center">
                                                 <p>{item.name}</p>
                                             </div>
-                                            <div className="col-12 col-md-3 d-flex justify-content-center">
-                                                <p>{ formato.format(item.price)}</p>
+                                            <div className="col-12 col-md-3 d-flex justify-content-center align-items-center">
+                                                <p>{formato.format(item.price)}</p>
                                             </div>
                                         </div>
                                     )
@@ -178,10 +211,16 @@ function Pages() {
         </body>
     )
 
+    function manejador(e) {
+        setnumeroPostal(e.target.value);
+        console.log(e.target.value);
+        e.preventDefault();
+    }
+
     function getProductos() {
         consultar().then((value) => {
             setproducto(value);
-            
+
             console.log(value);
         })
     }
@@ -190,6 +229,24 @@ function Pages() {
         const response = await fetch(`https://blackisp.herokuapp.com/products`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
+        })
+        const json = await response.json();
+        return json
+    }
+
+    async function forms() {
+        const response = await fetch(`https://blackisp.herokuapp.com/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nomebre: nombre,
+                apellidos: apellido,
+                correo: correo,
+                telefono: telefono,
+                postal: postal,
+                colonia: colonia,
+                estado: estado,
+            })
         })
         const json = await response.json();
         return json
