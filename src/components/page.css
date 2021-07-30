@@ -1,0 +1,34 @@
+.card-header {
+    border-bottom: 2px solid !important;
+}
+
+.input-group-text {
+    color           : white !important;
+    background-color: black !important;
+}
+
+.color-btn {
+    background-color: black;
+    width           : 100%;
+}
+
+.img-size {
+    height: 5rem;
+}
+
+.border-b {
+    border-bottom: solid 2px;
+}
+
+.card-header.aside {
+    background-color: thistle !important;
+}
+
+.card-footer1 {
+    background-color: thistle;
+}
+
+.card-footer2 {
+    background-color: black;
+    color           : white;
+}
